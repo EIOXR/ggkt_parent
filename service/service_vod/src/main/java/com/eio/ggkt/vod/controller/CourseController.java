@@ -1,14 +1,15 @@
 package com.eio.ggkt.vod.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.eio.ggkt.model.vod.Course;
 import com.eio.ggkt.result.Result;
 import com.eio.ggkt.vo.vod.CourseFormVo;
+import com.eio.ggkt.vo.vod.CoursePublishVo;
 import com.eio.ggkt.vo.vod.CourseQueryVo;
 import com.eio.ggkt.vod.service.CourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,6 +72,22 @@ public class CourseController {
     public Result update(@RequestBody CourseFormVo courseFormVo){
         courseService.updateCourseId(courseFormVo);
         return Result.ok(null);
+    }
+
+
+    @ApiOperation("根据课程id获取课程发布信息")
+    @GetMapping("/getCoursePublishVo/{id}")
+    public Result getCoursePublishVo(@PathVariable Long id){
+        CoursePublishVo coursePublishVo = courseService.getCoursePublishVo(id);
+        return Result.ok(coursePublishVo);
+    }
+
+
+
+    @ApiOperation("根据id发布课程")
+    @PutMapping("publishCourseById/{id}")
+    public Result publishCourseById(@ApiParam(value = "课程ID", required = true)@PathVariable Long id){
+        return courseService.publishCourseById(id) ? Result.ok(null) : Result.fail(null).message("发布失败，请重试！");
     }
 }
 

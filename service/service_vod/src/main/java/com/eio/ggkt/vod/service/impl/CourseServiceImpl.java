@@ -1,7 +1,6 @@
 package com.eio.ggkt.vod.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.eio.ggkt.model.vod.Course;
@@ -9,6 +8,7 @@ import com.eio.ggkt.model.vod.CourseDescription;
 import com.eio.ggkt.model.vod.Subject;
 import com.eio.ggkt.model.vod.Teacher;
 import com.eio.ggkt.vo.vod.CourseFormVo;
+import com.eio.ggkt.vo.vod.CoursePublishVo;
 import com.eio.ggkt.vo.vod.CourseQueryVo;
 import com.eio.ggkt.vod.mapper.CourseDescriptionMapper;
 import com.eio.ggkt.vod.mapper.CourseMapper;
@@ -19,10 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> implements CourseService {
@@ -218,5 +215,25 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         courseDescription.setId(courseFormVo.getId());
         courseDescription.setDescription(courseFormVo.getDescription());
         courseDescriptionMapper.updateById(courseDescription);
+    }
+
+    /**
+     * 实现根据id获取课程发布信息
+     * @param id
+     * @return
+     */
+    @Override
+    public CoursePublishVo getCoursePublishVo(Long id) {
+        return courseMapper.selectCoursePublishVoById(id);
+    }
+
+
+    @Override
+    public boolean publishCourseById(Long id) {
+        Course course = new Course();
+        course.setId(id);
+        course.setPublishTime(new Date());
+        course.setStatus(1);
+        return this.updateById(course);
     }
 }
