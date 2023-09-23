@@ -89,4 +89,16 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
 
         return null;
     }
+
+
+    /**
+     * 根据课程id删除课程章节
+     * @param id
+     */
+    @Override
+    public void deleteChapterByCourseId(Long id) {
+        QueryWrapper<Chapter> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id",id);
+        chapterMapper.delete(wrapper);
+    }
 }

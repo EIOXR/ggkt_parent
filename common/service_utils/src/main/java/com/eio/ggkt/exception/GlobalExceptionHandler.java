@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
 
     //全局异常处理
     @ExceptionHandler(Exception.class)
-    @ResponseBody//让其返回JSON格式
+    @ResponseBody//让其返回JSON格式\
     public Result error(Exception e){
         e.printStackTrace();
         return Result.fail(null).message("执行全局异常处理");

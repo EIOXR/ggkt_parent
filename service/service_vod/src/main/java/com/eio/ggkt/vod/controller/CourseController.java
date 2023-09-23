@@ -70,8 +70,10 @@ public class CourseController {
     @ApiOperation("修改课程信息")
     @PutMapping("/update")
     public Result update(@RequestBody CourseFormVo courseFormVo){
+//        //从中获取到课程ID返回前端以实现保存下一步成功进入
+//        Long courseId = courseFormVo.getId();
         courseService.updateCourseId(courseFormVo);
-        return Result.ok(null);
+        return Result.ok(courseFormVo.getId());
     }
 
 
@@ -88,6 +90,13 @@ public class CourseController {
     @PutMapping("publishCourseById/{id}")
     public Result publishCourseById(@ApiParam(value = "课程ID", required = true)@PathVariable Long id){
         return courseService.publishCourseById(id) ? Result.ok(null) : Result.fail(null).message("发布失败，请重试！");
+    }
+
+
+    @ApiOperation("删除课程")
+    @DeleteMapping("deleteCourseById/{id}")
+    public Result deleteCourseById(@PathVariable Long id){
+        return courseService.deleteCourseById(id) ? Result.ok(null) : Result.fail(null).message("删除失败，请重试！");
     }
 }
 

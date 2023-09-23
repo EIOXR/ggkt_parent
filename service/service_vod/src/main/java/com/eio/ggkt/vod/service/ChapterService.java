@@ -14,4 +14,11 @@ public interface ChapterService extends IService<Chapter> {
      * @return
      */
     List<ChapterVo> getTreeList(Long courseId);
+
+    /**
+     * 根据课程id删除课程章节
+     * @param id
+     */
+    void deleteChapterByCourseId(Long id);
+
 }
