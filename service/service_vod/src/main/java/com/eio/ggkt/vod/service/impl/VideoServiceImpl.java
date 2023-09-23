@@ -25,6 +25,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public void deleteVideoByCourseId(Long id) {
 
         QueryWrapper<Video> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id",id);
+        videoMapper.delete(wrapper);
 
     }
 }

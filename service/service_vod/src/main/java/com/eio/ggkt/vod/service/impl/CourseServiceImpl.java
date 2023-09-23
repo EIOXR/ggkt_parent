@@ -266,6 +266,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         //删除课程
         courseMapper.deleteById(id);
 
-        return false;
+
+        return true;
     }
 }

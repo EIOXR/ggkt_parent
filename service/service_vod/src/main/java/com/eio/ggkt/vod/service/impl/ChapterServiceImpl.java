@@ -36,7 +36,7 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
 
         QueryWrapper<Chapter> chapterWrapper = new QueryWrapper<>();
         chapterWrapper.eq("course_id", courseId);
-        chapterWrapper.orderByAsc("sort","id");
+        chapterWrapper.orderByAsc("sort", "id");
 
         //根据课程id获取章节chapters集合对象
         List<Chapter> chapters = chapterMapper.selectList(chapterWrapper);
@@ -74,18 +74,18 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
             }
             return voList;
         }
-           //[ChapterVo(id=1, title=第七章：I/O流, sort=7, children=[]),
-            // ChapterVo(id=15, title=第一章：Java入门, sort=1,
-            //          children=[
-            //                  VideoVo(id=33, title=第一节：Java简介, isFree=1, sort=1, videoSourceId=3b71d85d93554e7dbb59becdf823f63d),
-            //                  VideoVo(id=34, title=第二节：表达式和赋值语句, isFree=1, sort=2, videoSourceId=3b71d85d93554e7dbb59becdf823f63d),
-            //                  VideoVo(id=35, title=第三节：String类, isFree=0, sort=3, videoSourceId=3b71d85d93554e7dbb59becdf823f63d),
-            //                  VideoVo(id=36, title=第四节：程序风格, isFree=0, sort=4, videoSourceId=3b71d85d93554e7dbb59becdf823f63d)]),
-            // ChapterVo(id=16, title=第二章：控制台输入和输出, sort=2, children=[VideoVo(id=1, title=第一节, isFree=1, sort=0, videoSourceId=3b71d85d93554e7dbb59becdf823f63d), VideoVo(id=5, title=IO流基础, isFree=1, sort=0, videoSourceId=3b71d85d93554e7dbb59becdf823f63d)]),
-            // ChapterVo(id=17, title=第三章：控制流, sort=3, children=[]),
-            // ChapterVo(id=18, title=第四章：类的定义, sort=4, children=[]),
-            // ChapterVo(id=19, title=第五章：数组, sort=5, children=[]),
-            // ChapterVo(id=20, title=第六章：继承, sort=6, children=[])]
+        //[ChapterVo(id=1, title=第七章：I/O流, sort=7, children=[]),
+        // ChapterVo(id=15, title=第一章：Java入门, sort=1,
+        //          children=[
+        //                  VideoVo(id=33, title=第一节：Java简介, isFree=1, sort=1, videoSourceId=3b71d85d93554e7dbb59becdf823f63d),
+        //                  VideoVo(id=34, title=第二节：表达式和赋值语句, isFree=1, sort=2, videoSourceId=3b71d85d93554e7dbb59becdf823f63d),
+        //                  VideoVo(id=35, title=第三节：String类, isFree=0, sort=3, videoSourceId=3b71d85d93554e7dbb59becdf823f63d),
+        //                  VideoVo(id=36, title=第四节：程序风格, isFree=0, sort=4, videoSourceId=3b71d85d93554e7dbb59becdf823f63d)]),
+        // ChapterVo(id=16, title=第二章：控制台输入和输出, sort=2, children=[VideoVo(id=1, title=第一节, isFree=1, sort=0, videoSourceId=3b71d85d93554e7dbb59becdf823f63d), VideoVo(id=5, title=IO流基础, isFree=1, sort=0, videoSourceId=3b71d85d93554e7dbb59becdf823f63d)]),
+        // ChapterVo(id=17, title=第三章：控制流, sort=3, children=[]),
+        // ChapterVo(id=18, title=第四章：类的定义, sort=4, children=[]),
+        // ChapterVo(id=19, title=第五章：数组, sort=5, children=[]),
+        // ChapterVo(id=20, title=第六章：继承, sort=6, children=[])]
 
         return null;
     }
@@ -93,12 +93,13 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
 
     /**
      * 根据课程id删除课程章节
+     *
      * @param id
      */
     @Override
     public void deleteChapterByCourseId(Long id) {
         QueryWrapper<Chapter> wrapper = new QueryWrapper<>();
-        wrapper.eq("course_id",id);
+        wrapper.eq("course_id", id);
         chapterMapper.delete(wrapper);
     }
 }
