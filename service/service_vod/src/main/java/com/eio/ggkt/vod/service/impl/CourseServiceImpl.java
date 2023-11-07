@@ -1,6 +1,7 @@
 package com.eio.ggkt.vod.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.eio.ggkt.model.vod.Course;
@@ -14,9 +15,7 @@ import com.eio.ggkt.vod.mapper.CourseDescriptionMapper;
 import com.eio.ggkt.vod.mapper.CourseMapper;
 import com.eio.ggkt.vod.mapper.SubjectMapper;
 import com.eio.ggkt.vod.mapper.TeacherMapper;
-import com.eio.ggkt.vod.service.ChapterService;
 import com.eio.ggkt.vod.service.CourseService;
-import com.eio.ggkt.vod.service.VideoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +36,6 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Autowired
     private CourseDescriptionMapper courseDescriptionMapper;
-
-    @Autowired
-    private VideoService videoService;
-
-    @Autowired
-    private ChapterService chapterService;
 
     /**
      * 实现分页查询课程信息
@@ -225,48 +218,18 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         courseDescriptionMapper.updateById(courseDescription);
     }
 
-    /**
-     * 实现根据id获取课程发布信息
-     * @param id
-     * @return
-     */
     @Override
-    public CoursePublishVo getCoursePublishVo(Long id) {
+    public CoursePublishVo getCoursePublishVoById(Long id) {
         return courseMapper.selectCoursePublishVoById(id);
     }
 
-
     @Override
     public boolean publishCourseById(Long id) {
+
         Course course = new Course();
         course.setId(id);
         course.setPublishTime(new Date());
         course.setStatus(1);
         return this.updateById(course);
-    }
-
-
-    /**
-     * 根据课程id删除课程
-     * @param id
-     * @return
-     */
-    @Override
-    public boolean deleteCourseById(Long id) {
-
-        //删除课程小节
-        videoService.deleteVideoByCourseId(id);
-
-        //删除课程章节
-        chapterService.deleteChapterByCourseId(id);
-
-        //删除课程描述
-        courseDescriptionMapper.deleteById(id);
-
-        //删除课程
-        courseMapper.deleteById(id);
-
-
-        return true;
     }
 }
