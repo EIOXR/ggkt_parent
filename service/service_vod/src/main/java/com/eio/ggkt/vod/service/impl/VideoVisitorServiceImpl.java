@@ -51,10 +51,12 @@ public class VideoVisitorServiceImpl extends ServiceImpl<VideoVisitorMapper, Vid
         //创建两个list集合，一个存放日期数据，一个存放用户数量
         //从videoVisitorVoList中取出数据放入list集合中
         List<String> dateList = videoVisitorVoList.stream()
-                .map(VideoVisitorCountVo::getJoinTime).collect(Collectors.toList());
+                .map(VideoVisitorCountVo::getJoinTime)
+                .collect(Collectors.toList());
 
         List<Integer> userCountList = videoVisitorVoList.stream()
-                .map(VideoVisitorCountVo::getUserCount).collect(Collectors.toList());
+                .map(VideoVisitorCountVo::getUserCount)
+                .collect(Collectors.toList());
 
 
         //将数据放入map集合中
