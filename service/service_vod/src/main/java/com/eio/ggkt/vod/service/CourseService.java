@@ -1,5 +1,6 @@
 package com.eio.ggkt.vod.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.eio.ggkt.model.vod.Course;
@@ -52,7 +53,7 @@ public interface CourseService extends IService<Course> {
      * @param id
      * @return
      */
-    CoursePublishVo getCoursePublishVo(Long id);
+    CoursePublishVo getCoursePublishVoById(Long id);
 
     /**
      * 根据id发布课程
@@ -60,11 +61,4 @@ public interface CourseService extends IService<Course> {
      * @return
      */
     boolean publishCourseById(Long id);
-
-    /**
-     * 根据课程id删除课程
-     * @param id
-     * @return
-     */
-    boolean deleteCourseById(Long id);
 }
